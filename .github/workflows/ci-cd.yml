@@ -8,8 +8,8 @@ on:
 
 jobs:
 
-  build-and-test-patient-service:
-    name: Build & Test patient-service
+  build-and-test-healthcare:
+    name: Build & Test healthcare
     runs-on: ubuntu-latest
 
     steps:
@@ -23,8 +23,8 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build and test patient-service
-        working-directory: ./patient-service
+      - name: Build and test healthcare
+        working-directory: ./healthcare
         run: ./mvnw clean verify
 
   build-and-test-order-service:
@@ -65,12 +65,12 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build and push patient-service image
+      - name: Build and push healthcare image
         uses: docker/build-push-action@v5
         with:
-          context: ./patient-service
+          context: ./healthcare
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/patient-service:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/healthcare:latest
 
       - name: Build and push order-service image
         uses: docker/build-push-action@v5
